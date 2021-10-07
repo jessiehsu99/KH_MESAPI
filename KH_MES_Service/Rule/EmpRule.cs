@@ -13,7 +13,6 @@ namespace KH_MES_Service.Rule
     /// 依工號及密碼取得使用者資訊
     /// </summary>
     class EmpRule : Exception, EmpInterFace
-        , Interface1
     {
         /// <summary>
         /// 依使用者工號&密碼取得使用者資料

@@ -15,11 +15,5 @@ namespace KH_MES_Service
             return R;
         }
 
-        public static KH_MES_Service.InterFace.Interface1 MESRule_Test()
-        {
-            KH_MES_Service.InterFace.Interface1 R = new KH_MES_Service.Rule.EmpRule();
-
-            return R;
-        }
     }
 }

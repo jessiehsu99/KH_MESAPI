@@ -51,7 +51,6 @@
     <Compile Include="Base\BaseExt.cs" />
     <Compile Include="CreateRule.cs" />
     <Compile Include="InterFace\EmpInterFace.cs" />
-    <Compile Include="InterFace\Interface1.cs" />
     <Compile Include="objs\DBParam.cs" />
     <Compile Include="objs\iEmpData.cs" />
     <Compile Include="objs\MesException.cs" />

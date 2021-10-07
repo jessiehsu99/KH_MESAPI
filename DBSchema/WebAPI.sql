@@ -1,0 +1,40 @@
+USE [WebAPI]
+GO
+
+/****** Object:  Table [dbo].[API_Auth]    Script Date: 2019/6/11 ¤U¤È 01:42:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[API_Auth](
+	[AppID] [nvarchar](50) NOT NULL,
+	[UserName] [nvarchar](50) NOT NULL,
+	[PWD] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_API_Auth] PRIMARY KEY CLUSTERED 
+(
+	[AppID] ASC,
+	[UserName] ASC,
+	[PWD] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[API_Control](
+	[AppID] [nvarchar](50) NOT NULL,
+	[Control] [nvarchar](50) NOT NULL,
+	[Action] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_HR_Control] PRIMARY KEY CLUSTERED 
+(
+	[AppID] ASC,
+	[Control] ASC,
+	[Action] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+

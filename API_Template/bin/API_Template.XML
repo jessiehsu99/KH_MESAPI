@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API_Template</name>
+    </assembly>
+    <members>
+        <member name="M:API_Template.Controllers.LoginController.Post(LiteOn.WebAPI.Auth.LogonRequest)">
+            <summary>
+            驗證UserName、UserPassword、AppID
+            </summary>
+            <param name="loginRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API_Template.Controllers.LoginController.PostPlus(LiteOn.WebAPI.Auth.LogonPlusRequest)">
+            <summary>
+            增加第四個參數Time，可設定秒數(token的時效)
+            </summary>
+            <param name="vRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API_Template.Controllers.TestServicesController.getHello(API_Template.Controllers.TestServicesController.TestInput)">
+            <summary>
+            測試API服務是否運作中
+            </summary>
+            <param name="item">AppID=應用程式ID、Name=要顯示的訊息名稱、Num=要回傳的訊息次數
+            </param>
+            <remarks>
+            測試API服務是否運作中，傳入AppID、Name、Num參數<br />
+            若API有在服務中，將傳回Num指定次數的 Hello World 訊息
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:API_Template.Controllers.TestServicesController.getHello2(API_Template.Controllers.TestServicesController.TestInput)">
+            <summary>
+            測試API服務是否運作中
+            </summary>
+            <param name="item">AppID=應用程式ID、Name=要顯示的訊息名稱、Num=要回傳的訊息次數
+            </param>
+            <remarks>
+            測試API服務是否運作中，傳入AppID、Name、Num參數<br />
+            若API有在服務中，將傳回Num指定次數的 Hello World 訊息
+            </remarks>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

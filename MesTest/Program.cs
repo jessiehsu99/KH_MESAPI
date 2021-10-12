@@ -14,11 +14,11 @@ namespace MesTest
         static void Main(string[] args)
         {
 
-            var _emp = CreateRule.MESRule_Emp();
+            var _emp = CreateRule.MESRule_Emp();;
 
+          
 
-
-            var R = _emp.TransEnabledUser_byUserNo(new iEmpData() { UserNo = "001", Enabled = true });
+               var R = _emp.TransEnabledUser_byUserNo(new iEmpData() { UserNo = "001", Enabled = true });
 
 
 

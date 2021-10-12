@@ -24,10 +24,12 @@ namespace KH_MES_Service.objs
         {
             MES_Result = new MesException();
         }
+        public MesException MES_Result { get; set; }
+
         public string UserID { get; set; }
         public string UserNo { get; set; }
         public string UserName { get; set; }
         public string Pwd { get; set; }
-        public MesException MES_Result { get; set; }
+  
     }
 }

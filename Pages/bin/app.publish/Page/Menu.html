@@ -1,0 +1,32 @@
+﻿<script>
+    ls = [
+        { MenuName: 'TGS_Action', url: 'Fun/TGS_Action.html', id: 'TGS_Action' },
+        { MenuName: 'M2', url: 'aaaaaa', id: 'M2' }
+    ];
+
+
+
+
+    HtmlStr = '';
+    $.each(ls, function (ind, obj) {
+        HtmlStr += '<a id="' + obj.id + '">' + obj.MenuName + '</a><br/>';
+    });
+    $('#baseMenuPanel').html(HtmlStr);
+
+    $.each(ls, function (ind, obj) {
+        $('#' + obj.id).linkbutton({
+            width:'100%'
+        });
+        $('#' + obj.id).bind('click', function () {
+            $('#baseFunPanel').panel({
+                title: obj.MenuName,
+                fit: true,
+                href: obj.url
+            });
+        });
+
+        
+    });
+
+    
+</script>

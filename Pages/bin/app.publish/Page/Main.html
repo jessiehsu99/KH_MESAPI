@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../Scripts/jquery-easyui-1.10.0/themes/gray/easyui.css" rel="stylesheet" />
+    <link href="../Scripts/jquery-easyui-1.10.0/themes/color.css" rel="stylesheet" />
+    <link href="../Scripts/jquery-easyui-1.10.0/themes/icon.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-easyui-1.10.0/jquery.min.js"></script>
+    <script src="../Scripts/jquery-easyui-1.10.0/jquery.easyui.min.js"></script>
+    <script src="../Scripts/jquery-easyui-1.10.0/locale/easyui-lang-zh_TW.js"></script>
+    <script src="../Scripts/jquery.linq.min.js"></script>
+    <script src="../Js"></script>
+
+    <title></title>
+</head>
+<body class="easyui-layout" fit="true">
+    <div data-options="region:'north'" style="height:10%">
+        <div id="baseLoginPnl" style="padding:10px">
+            <input id="baseUID" />
+            <input id="basePwd" />
+            <a id="baseSignIn">Sign in</a>
+        </div>
+        <div id="baseLoginUserInfo" style="padding:10px">
+            <a id="baseSignOut"><label id="baseUserInfo" style="font-size:24px"></label></a>
+        </div>
+    </div>
+    <div data-options="region:'west'" style="width:15%">
+        <div id="baseMenuPanel"></div>
+    </div>
+    <div data-options="region:'center'">
+        <div id="baseFunPanel"></div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#baseLoginPnl').panel({
+                fit: true
+            });
+            $('#baseLoginUserInfo').panel({
+                fit: true,
+                closed: true
+            });
+
+
+            $('#baseUID').textbox({
+                label: '工號',
+                width: 250
+            });
+            $('#baseUID').textbox('textbox').bind('keydown', function (e) {
+                if (e.keyCode == 13) {	// when press ENTER key, accept the inputed value.
+                    $('#basePwd').textbox('textbox').focus();
+                }
+            });
+
+            $('#basePwd').textbox({
+                label: '密碼',
+                width: 250,
+                type: 'password'
+            });
+            $('#basePwd').textbox('textbox').bind('keydown', function (e) {
+                if (e.keyCode == 13) {	// when press ENTER key, accept the inputed value.
+                    SignIn();
+                }
+            });
+
+
+            $('#baseSignOut').linkbutton({
+                iconCls: 'icon-man',
+                plain: true
+            });
+            $('#baseSignOut').bind('click', function () {
+                $.messager.confirm('Sign out', 'Are you sure you want to sign out?', function (r) {
+                    if (r) {
+                        $('#baseLoginUserInfo').panel('close');
+                        $('#baseLoginPnl').panel('open');
+                    }
+                });
+            });
+
+            $('#baseSignIn').linkbutton({});
+            $('#baseSignIn').bind('click', function () {
+                SignIn();
+            });
+
+            function SignIn() {
+                R = API('../emp/getEmpInfo', { UserNo: $('#baseUID').textbox('getText'), Pwd: $('#basePwd').textbox('getText') });
+
+                if (R.MES_Result.HResult != 200) {
+                    Msg(R.MES_Result.Message);
+                    return;
+                };
+
+                $('#baseLoginPnl').panel('close');
+                $('#baseLoginUserInfo').panel('open');
+                $('#baseUserInfo').text(R.UserName);
+            }
+
+            function Msg(str) {
+                $.messager.show({
+                    title: 'Message',
+                    msg: str,
+                    showType: 'slide',
+                    style: {
+                        right: '',
+                        top: document.body.scrollTop + document.documentElement.scrollTop,
+                        bottom: ''
+                    }
+                });
+            }
+            $('#baseMenuPanel').panel({
+                title: 'Menu',
+                fit: true,
+                href:'Menu.html'
+            });
+            
+            $('#baseUID').textbox('textbox').focus();
+        });
+    </script>
+
+</body>
+</html>

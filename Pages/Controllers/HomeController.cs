@@ -10,7 +10,7 @@ namespace Pages.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Redirect("Page/Main.html");
         }
 
         public ActionResult About()

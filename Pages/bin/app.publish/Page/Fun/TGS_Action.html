@@ -1,0 +1,246 @@
+﻿<div class="easyui-layout" fit="true">
+    <div data-options="region:'west'" style="width:25%">
+        <table id="tTerminal" fit="true"></table>
+        <div id="tools">
+            <input id="Line" /><br />
+            <input id="Stage" /><br />
+            <input id="Proc" />
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <form id="frm">
+            <input id="SP" /></p>
+            <input id="TLINEID" name="PDLINE_ID" /></p>
+            <input id="TSTAGEID" name="STAGE_ID" /></p>
+            <input id="TPROCESSID" name="PROCESS_ID" /></p>
+            <input id="TTERMINALID" name="TERMINAL_ID" /></p>
+            <input id="TSAJET1" /></p>
+            <input id="TSAJET2" /></p>
+            <input id="TSAJET3" /></p>
+            <input id="TSAJET4" /></p>
+            <input id="TSAJET4TON" /></p>
+            <input id="TSAJET5" /></p>
+            <input id="TSAJET5TON" /></p>
+            <a id="submit">Submit</a></p>
+            <input id="ResultMsg"/>
+        </form>
+    </div>
+ 
+</div>
+
+
+<input id="t" />
+
+<script>
+
+    var R = API('../TGS/GetTerminalList', {});
+
+    var cbLine = $.Enumerable.From(R)
+        .Select(function (x) {
+            return { text: x.PDLINE_NAME, id: x.PDLINE_ID };
+        })
+        .Distinct(x => x.text)
+        .ToArray();
+
+    var cbSTAGE = $.Enumerable.From(R)
+        .Select(function (x) {
+            return { text: x.STAGE_NAME, id: x.STAGE_ID };
+        })
+        .Distinct(x => x.text)
+        .ToArray();
+
+    var cbPROCESS = $.Enumerable.From(R)
+        .Select(function (x) {
+            return { text: x.PROCESS_NAME, id: x.PROCESS_ID };
+        })
+        .Distinct(x => x.text)
+        .ToArray();
+
+
+
+    var a = R.filter(function (item, index, array) { return item.PDLINE_NAME == 'SMT03' });
+
+
+
+    //console.log(R);
+    $('#tTerminal').datagrid(
+        {
+            title: '工作站選擇',
+            columns: [[
+                { field: 'PDLINE_NAME', title: '線別', width: '100' },
+                { field: 'STAGE_NAME', title: '區段', width: '100' },
+                { field: 'PROCESS_NAME', title: '製程', width: '100' },
+                { field: 'TERMINAL_NAME', title: '工作站', width: '100' }
+            ]],
+            data: R,
+            singleSelect: true,
+            toolbar: '#tools',
+            onClickRow: function (ind, r) {
+                $('#frm').form('load', r)
+            }
+        });
+
+    $('#Line').combobox({
+        label: '線別',
+        width: 250,
+        valueField: 'id',
+        textField: 'text',
+        data: cbLine,
+        onChange: function (n, o) { dgFilter(); }
+    })
+    $('#Stage').combobox({
+        label: '區段',
+        width: 250,
+        valueField: 'id',
+        textField: 'text',
+        data: cbSTAGE,
+        onChange: function (n, o) { dgFilter(); }
+    })
+    $('#Proc').combobox({
+        label: '製程',
+        width: 250,
+        valueField: 'id',
+        textField: 'text',
+        data: cbPROCESS,
+        onChange: function (n, o) { dgFilter(); }
+    })
+
+    $('#SP').combobox({
+        label: '執行程式',
+        width: 350,
+        valueField: 'id',
+        textField: 'text',
+        labelWidth: 100,
+        data: [
+            { text: 'CA_CODE_COMMAND_SMT', id: 'CA_CODE_COMMAND_SMT' },
+            { text: 'KH_CMD_SMT_DLEQP', id: 'KH_CMD_SMT_DLEQP' }
+        ]
+    })
+
+    $('#TLINEID').textbox({
+        label: 'TLINEID',
+        readonly: true,
+        width: 350,
+        labelWidth: 100
+    });
+
+    $('#TSTAGEID').textbox({
+        label: 'TSTAGEID',
+        readonly: true,
+        width: 350,
+        labelWidth: 100
+    });
+
+    $('#TPROCESSID').textbox({
+        label: 'TPROCESSID',
+        readonly: true,
+        width: 350,
+        labelWidth: 100
+    });
+
+    $('#TTERMINALID').textbox({
+        label: 'TTERMINALID',
+        readonly: true,
+        width: 350,
+        labelWidth: 100
+    });
+
+    $('#TSAJET1').textbox({
+        label: 'TSAJET1',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET2').textbox({
+        label: 'TSAJET2',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET3').textbox({
+        label: 'TSAJET3',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET4').textbox({
+        label: 'TSAJET4',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET4TON').textbox({
+        label: 'TSAJET4TON',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET5').textbox({
+        label: 'TSAJET5',
+        width: 500,
+        labelWidth: 100
+    });
+    $('#TSAJET5TON').textbox({
+        label: 'TSAJET5TON',
+        width: 500,
+        labelWidth: 100
+    });
+
+    $('#ResultMsg').textbox({
+        multiline: true,
+        width: '100%',
+        readonly: true,
+        height:200
+    });
+
+
+    $('#submit').linkbutton({
+        width: 250,
+        iconCls: 'icon-ok'
+    });
+    $('#submit').bind('click', function () {
+
+         submitData = {
+            TSAJET1: $('#TSAJET1').textbox('getText'),
+            TSAJET2: $('#TSAJET2').textbox('getText'),
+            TSAJET3: $('#TSAJET3').textbox('getText'),
+            TSAJET4: $('#TSAJET4').textbox('getText'),
+            TSAJET4TON: $('#TSAJET4TON').textbox('getText'),
+            TSAJET5: $('#TSAJET5').textbox('getText'),
+            TSAJET5TON: $('#TSAJET5TON').textbox('getText'),
+            TLINEID: $('#TLINEID').textbox('getText'),
+            TSTAGEID: $('#TSTAGEID').textbox('getText'),
+            TPROCESSID: $('#TPROCESSID').textbox('getText'),
+            TTERMINALID: $('#TTERMINALID').textbox('getText')
+        };
+        
+        var Result = API('../TGS/' + $('#SP').textbox('getText'), submitData);
+        $('#ResultMsg').textbox('setText', Result);
+    });
+
+
+    var dgData = null;
+    function dgFilter() {
+        dgData = R;
+
+        var L = $('#Line').combobox('getText');
+        var S = $('#Stage').combobox('getText');
+        var P = $('#Proc').combobox('getText');
+
+        if (L != '') {
+            dgData = $.Enumerable.From(dgData).Where(function (x) {
+                return x.PDLINE_NAME == L
+            }).ToArray();
+        }
+
+        if (S != '') {
+            dgData = $.Enumerable.From(dgData).Where(function (x) {
+                return x.STAGE_NAME == S
+            }).ToArray();
+        }
+
+        if (P != '') {
+            dgData = $.Enumerable.From(dgData).Where(function (x) {
+                return x.PROCESS_NAME == P
+            }).ToArray();
+        }
+        $('#tTerminal').datagrid('loadData', dgData);
+    }
+
+    //$('#tTerminal').datagrid('loadData',R);
+</script>

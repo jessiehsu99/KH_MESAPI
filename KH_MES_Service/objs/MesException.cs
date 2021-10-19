@@ -17,7 +17,6 @@ namespace KH_MES_Service.objs
         {
             HResult = code;
         }
-
     }
 
     public static class MesExceptionExt

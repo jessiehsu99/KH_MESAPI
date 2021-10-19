@@ -12,12 +12,12 @@ namespace KH_MES_Service.Base
 {
   public  static class BaseExt
     {
-        public static void CreateParam(this DbCommand cmd ,DBParam param )
+        public static void CreateParam(this DbCommand cmd ,DBParam param, ParameterDirection Direction = ParameterDirection.Input)
         {
             var _param = cmd.CreateParameter();
             _param.ParameterName = param.ParamName;
             _param.Value = param.ParamValue;
-            _param.Direction = ParameterDirection.Input;
+            _param.Direction = Direction;
             cmd.Parameters.Add(_param);
         }
     }

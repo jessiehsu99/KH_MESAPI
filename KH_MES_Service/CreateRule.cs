@@ -15,5 +15,16 @@ namespace KH_MES_Service
             return R;
         }
 
+        public static KH_MES_Service.InterFace.RPTInterFace MESRule_RPT()
+        {
+            KH_MES_Service.InterFace.RPTInterFace R = new KH_MES_Service.Rule.RPTRule();
+            return R;
+        }
+
+        public static KH_MES_Service.InterFace.TGSInterFace MESRule_TGS()
+        {
+            KH_MES_Service.InterFace.TGSInterFace R = new KH_MES_Service.Rule.TGSRule();
+            return R;
+        }
     }
 }

@@ -35,6 +35,10 @@
     <Reference Include="LITEON.MES.DB">
       <HintPath>..\..\..\source\repos\MES_Update\MES_Update\Lib\LITEON.MES.DB.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>..\..\..\source\repos\MES_Update\MES_Update\Lib\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
@@ -51,13 +55,25 @@
     <Compile Include="Base\BaseExt.cs" />
     <Compile Include="CreateRule.cs" />
     <Compile Include="InterFace\EmpInterFace.cs" />
+    <Compile Include="InterFace\RPTInterFace.cs" />
+    <Compile Include="InterFace\TGSInterFace.cs" />
     <Compile Include="objs\DBParam.cs" />
     <Compile Include="objs\iEmpData.cs" />
+    <Compile Include="objs\iTGSInData.cs" />
     <Compile Include="objs\MesException.cs" />
     <Compile Include="objs\oEmpInfo.cs" />
+    <Compile Include="objs\oRPT_ViewInfo.cs" />
+    <Compile Include="objs\oTerminalInfo.cs" />
+    <Compile Include="objs\oViewData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rule\EmpRule.cs" />
+    <Compile Include="Rule\RPTRule.cs" />
+    <Compile Include="Rule\TGSRule.cs" />
     <Compile Include="Service\EmpService.cs" />
+    <Compile Include="Service\RPTService.cs" />
+    <Compile Include="Service\TerminalService.cs" />
+    <Compile Include="Service\TGSService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
